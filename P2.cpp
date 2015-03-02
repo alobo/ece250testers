@@ -40,12 +40,12 @@ void test_dynamic_queue() {
 	try {
 		q->head();
 		assert(false);
-	} catch (underflow *e) {}
+	} catch (underflow e) {}
 
 	try {
 		q->dequeue();
 		assert(false);
-	} catch (underflow *e) {}
+	} catch (underflow e) {}
 
 	std::cout << "Testing basic enqueue" << std::endl;
 	for (int i = 1; i < N+1; i++) {
