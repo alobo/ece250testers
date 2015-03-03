@@ -5,28 +5,98 @@
 
 using namespace std;
 
-//TODO: Finish testing linked stack
 void test_linked_stack() {
 	Linked_stack<int> *s = new Linked_stack<int>();
-	assert(s->empty() == true);
 
+	std::cout << "Testing getters" << std::endl;
+	assert(s->empty() == true);
+	try {
+		s->pop();
+		assert(false);
+	} catch (underflow e) {}
+
+	try {
+		s->top();
+		assert(false);
+	} catch (underflow e) {}
+
+	std::cout << "Testing push" << std::endl;
 	for (int i = 0; i < 8; i++) {
 		assert(s->size() == i);
 		s->push(i);
 	}
 	assert(s->list_size() == 1);
 
-	//Test adding second array
+	std::cout << "Testing push resize (1)" << std::endl;
 	s->push(8);
 	assert(s->list_size() == 2);
 
-	//Test adding a third array
+	std::cout << "Testing push resize (2)" << std::endl;
 	for (int i = 9; i < 18; i++) {
 		s->push(i);
 	}
 	assert(s->list_size() == 3);
 
-	std::cout << *s << std::endl;
+
+	std::cout << "Testing pop (1)" << std::endl;
+	assert(s->pop() == 17);
+	assert(s->pop() == 16);
+	assert(s->size() == 16);
+	assert(s->list_size() == 2);
+
+	for (int i = 15; i >= 0; i--) {
+		assert(s->top() == i);
+		assert(s->pop() == i);
+	}
+	assert(s->size() == 0);
+	assert(s->list_size() == 0);
+
+
+	std::cout << "Testing push after empty" << std::endl;
+	for (int i = 0; i < 8; i++) {
+		assert(s->size() == i);
+		s->push(i * 10);
+		assert(s->top() == i * 10);
+	}
+	std::cout << "Testing push resize (2)" << std::endl;
+	s->push(80);
+	assert(s->list_size() == 2);
+
+	delete s;
+
+
+	std::cout << "Testing copy constructor" << std::endl;
+	s = new Linked_stack<int>();
+	for (int i = 0; i < 10; i++) {
+		s->push(i);
+	}
+	assert(s->size() == 10);
+	assert(s->list_size() == 2);
+	assert(s->top() == 9);
+
+	Linked_stack<int> *s2 = new Linked_stack<int>(*s);
+	assert(s->size() == 10);
+	assert(s->list_size() == 2);
+	assert(s->top() == 9);
+	assert(s2->size() == 10);
+	assert(s2->list_size() == 2);
+	assert(s2->top() == 9);
+
+	std::cout << "Testing copy constructor (modifying original stack)" << std::endl;
+	assert(s->pop() == 9);
+	assert(s->pop() == 8);
+	assert(s->size() == 8);
+	assert(s2->size() == 10);
+
+	for (int i = 9; i >=0; i--) {
+		assert(s2->pop() == i);
+	}
+	assert(s2->size() == 0);
+	assert(s->size() == 8);
+
+	for (int i = 7; i >=0; i--) {
+		assert(s->pop() == i);
+	}
 }
 
 void test_dynamic_queue() {
@@ -95,7 +165,6 @@ void test_dynamic_queue() {
 	q->enqueue(12);
 
 	for (int i = 3; i < 13; i++) {
-//		std::cout << q->head() << " =? " << i << std::endl;
 		assert(q->dequeue() == i);
 	}
 
