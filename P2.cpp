@@ -202,6 +202,35 @@ void test_dynamic_queue() {
 	std::cout << *q << std::endl;
 
 	delete q;
+
+	N = 4;
+
+	q = new Dynamic_queue<int>(N);
+	std::cout << "Testing copy constructor" << std::endl;
+	for (int i = 1; i < N+1; i++) {
+		q->enqueue(i);
+		assert(q->head() == 1);
+		assert(q->size() == i);
+		assert(q->capacity() == N);
+	}
+
+	Dynamic_queue<int>* q2 = new Dynamic_queue<int>(*q);
+	assert(q->size() == N);
+	assert(q->head() == 1);
+	assert(q2->size() == N);
+	assert(q2->head() == 1);
+	assert(q2->size() == N);
+
+	std::cout << "Testing copy constructor (modifying original queue)" << std::endl;
+	assert(q->dequeue() == 1);
+	assert(q->size() == N-1);
+	assert(q2->size() == N);
+
+	assert(q2->dequeue() == 1);
+	assert(q2->dequeue() == 2);
+	assert(q2->dequeue() == 3);
+
+	assert(q->size() == N-1);
 }
 
 int main() {
