@@ -135,6 +135,39 @@ int main() {
 		last_num = current_num;
 	}
 
+
+	std::cout << "Testing copy constructor" << std::endl;
+	delete heap;
+	heap = new Leftist_heap<int>();
+	heap->push(10);
+	heap->push(11);
+	heap->push(9);
+	heap->push(12);
+	heap->push(-5);
+	heap->push(6);
+	heap->push(-7);
+
+	//Ensure copy does not write to original tree
+	Leftist_heap<int> *copy = new Leftist_heap<int>(*heap);
+	assert(copy->size() == heap->size());
+	assert(copy->top() == heap->top());
+	int oldtop = heap->pop();
+	assert(copy->top() == oldtop);
+	assert(copy->size() -1 == heap->size());
+	copy->push(120);
+	assert(copy->size() -2 == heap->size());
+
+	//Ensure all elements were copied
+	assert(copy->pop() == -7);
+	assert(copy->pop() == -5);
+	assert(copy->pop() == 6);
+	assert(copy->pop() == 9);
+	assert(copy->pop() == 10);
+	assert(copy->pop() == 11);
+	assert(copy->pop() == 12);
+	assert(copy->pop() == 120);
+	assert(copy->size() == 0);
+
 	std::cout << "All tests passed!" << std::endl;
 	return 0;
 }
