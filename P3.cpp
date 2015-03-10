@@ -84,6 +84,42 @@ int main() {
 	} catch (underflow e) {}
 
 
+	std::cout << "Testing count" << std::endl;
+	heap->push(10);
+	heap->push(11);
+	heap->push(9);
+	heap->push(12);
+	heap->push(-5);
+	heap->push(6);
+	heap->push(-7);
+
+	heap->push(50);
+	heap->push(25);
+	heap->push(30);
+	heap->push(20);
+	heap->push(50);
+	heap->push(42);
+	heap->push(-612);
+	heap->push(1);
+	heap->push(123);
+	heap->push(42);
+
+	//Ensure the old numbers actually got deleted
+	assert(heap->count(10) == 1);
+	assert(heap->count(11) == 1);
+	assert(heap->count(9) == 1);
+	assert(heap->count(12) == 1);
+	assert(heap->count(-5) == 1);
+	assert(heap->count(6) == 1);
+	assert(heap->count(-7) == 1);
+
+	assert(heap->count(50) == 2);
+	assert(heap->count(42) == 2);
+	assert(heap->count(30) == 1);
+	assert(heap->count(-612) == 1);
+	assert(heap->count(3) == 0);
+
+
 	//Testing min-heap property/stress test
 	std::cout << "Testing random numbers" << std::endl;
 	for (int i = 0; i < 100000; i++) {
