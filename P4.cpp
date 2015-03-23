@@ -7,6 +7,23 @@ int main() {
     
     int n = 5;
     
+    Quadratic_hash_table<int> *QHT0 = new Quadratic_hash_table<int>(n);
+    
+    std::cout << "Base test" << std::endl;
+    QHT0->insert(31);
+    QHT0->insert(191);
+    assert(QHT0->bin(31) == 31);
+    assert(QHT0->bin(0) == 191);
+    QHT0->insert(159);
+    assert(QHT0->bin(2) == 159);
+    assert(QHT0->erase(111) == false);
+    assert(QHT0->erase(159) == true);
+    assert(QHT0->erase(159) == false);
+    assert(QHT0->size() == 2);
+    std::cout << "Base test passed" << std::endl;
+    
+    delete QHT0;
+    
     Quadratic_hash_table<int> *QHT = new Quadratic_hash_table<int>(n);
 
     std::cout << "Testing Initialization" << std::endl;
@@ -201,6 +218,42 @@ int main() {
     assert(QHT3->size() == 30);
 
     std::cout << "Testing for erase with load factor passed" << std::endl;
+    
+    delete QHT3;
+    
+    std::cout << "Additional testing for erase with load factor" << std::endl;
+    QHT3 = new Quadratic_hash_table<int>(3);
+    QHT3->insert(8);
+    assert(QHT3->bin(0) == 8);
+    QHT3->insert(16);
+    assert(QHT3->bin(1) == 16);
+    QHT3->insert(24);
+    assert(QHT3->bin(3) == 24);
+    QHT3->insert(32);
+    assert(QHT3->bin(6) == 32);
+    QHT3->insert(10);
+    assert(QHT3->bin(2) == 10);
+    assert(QHT3->erase(16) == true);
+    assert(QHT3->member(24) == true);
+    QHT3->insert(7);
+    assert(QHT3->bin(7) == 7);
+    assert(QHT3->member(15) == false);
+    QHT3->insert(64);
+    assert(QHT3->bin(1) == 64);
+    assert(QHT3->load_factor() == 0.75);
+    assert(QHT3->erase(10) == true);
+    assert(QHT3->erase(7) == true);
+    assert(QHT3->load_factor() == 0.75);
+    QHT3->insert(15);
+    assert(QHT3->load_factor() == 0.75);
+    QHT3->insert(13);
+    assert(QHT3->load_factor() == 0.875);
+    QHT3->insert(12);
+    QHT3->insert(65);
+    assert(QHT3->load_factor() == 1.0);
+    QHT3->clear();
+    assert(QHT3->load_factor() == 0.0);
+    std::cout << "Additional testing for erase with load factor passed" << std::endl;
     
     delete QHT3;
     
