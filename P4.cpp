@@ -7,6 +7,24 @@ int main() {
     
     int n = 5;
     
+    Quadratic_hash_table<int> *QHT0 = new Quadratic_hash_table<int>(n);
+    
+    std::cout << "Testing base file provided by Harder" << std::endl;
+    QHT0->insert(31);
+    QHT0->insert(191);
+    assert(QHT0->bin(31) == 31);
+    assert(QHT0->bin(0) == 191);
+    QHT0->insert(159);
+    assert(QHT0->bin(2) == 159);
+    assert(QHT0->erase(111) == true);
+    assert(QHT0->erase(159) == true);
+    assert(QHT0->erase(159) == false);
+    assert(QHT0->size(2) == true);
+    QHT0->clear();
+    std::cout << "Completed base test successfully!" std::endl;
+    
+    delete QHT0;
+    
     Quadratic_hash_table<int> *QHT = new Quadratic_hash_table<int>(n);
 
     std::cout << "Testing Initialization" << std::endl;
