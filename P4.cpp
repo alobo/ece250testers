@@ -346,5 +346,7 @@ int main() {
 
     std::cout << "Testing ignore duplicates passed" << std::endl;
 
+    std::cout << "All tests passed!" << std::endl;
+
     return 0;
 }
