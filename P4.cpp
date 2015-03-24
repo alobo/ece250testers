@@ -25,7 +25,7 @@ int main() {
     delete QHT0;
     
     Quadratic_hash_table<int> *QHT = new Quadratic_hash_table<int>(n);
-
+    
     std::cout << "Testing Initialization" << std::endl;
     assert(QHT->size() == 0);
     assert(QHT->capacity() == 1 << n);
@@ -210,7 +210,7 @@ int main() {
     QHT3->erase(-69);
     assert(QHT3->load_factor() == 1);
     assert(QHT3->size() == 30);
-
+    
     std::cout << "Testing for erase with load factor passed" << std::endl;
     
     delete QHT3;
@@ -253,51 +253,10 @@ int main() {
     
     Quadratic_hash_table<int> *QHT4 = new Quadratic_hash_table<int>(n);
     
-    std::cout << "Additional testing for insert/erase TBD" << std::endl;
-    
-    for (int i = 0; i < 10; i++) {
-        QHT4->insert(i);
-    }
-    
-    for (int k = 20; k < 30; k++) {
-        QHT4->insert(k);
-    }
-    
-    assert(QHT4->size() == 20);
-    
-    QHT4->erase(0);
-    QHT4->erase(1);
-    QHT4->erase(2);
-    QHT4->erase(3);
-    QHT4->erase(4);
-    QHT4->erase(5);
-    QHT4->erase(20);
-    QHT4->erase(21);
-    QHT4->erase(22);
-    QHT4->erase(23);
-    QHT4->erase(24);
-    QHT4->erase(25);
-    
-    assert(QHT4->member(0) == false);
-    assert(QHT4->member(1) == false);
-    assert(QHT4->member(2) == false);
-    assert(QHT4->member(3) == false);
-    assert(QHT4->member(4) == false);
-    assert(QHT4->member(5) == false);
-    assert(QHT4->member(20) == false);
-    assert(QHT4->member(21) == false);
-    assert(QHT4->member(22) == false);
-    assert(QHT4->member(23) == false);
-    assert(QHT4->member(24) == false);
-    assert(QHT4->member(25) == false);
-    
-    delete QHT4;
-    
-
     std::cout << "Testing ignore duplicates" << std::endl;
-
+    
     QHT4 = new Quadratic_hash_table<int>(n);
-
+    
     QHT4->insert(0);
     QHT4->insert(5);
     QHT4->insert(100);
@@ -310,7 +269,7 @@ int main() {
     QHT4->insert(3);
     QHT4->insert(6);
     QHT4->insert(9);
-
+    
     assert(QHT4->bin(0) == 0);
     assert(QHT4->bin(3) == 3);
     assert(QHT4->bin(4) == 100);
@@ -324,9 +283,9 @@ int main() {
     assert(QHT4->bin(27) == -69);
     assert(QHT4->bin(23) == -42);
     assert(QHT4->size() == 12);
-
+    
     QHT4->insert(-10);
-
+    
     //Ensure table was not modified
     assert(QHT4->size() == 12);
     assert(QHT4->bin(0) == 0);
@@ -341,12 +300,12 @@ int main() {
     assert(QHT4->bin(22) == -10);
     assert(QHT4->bin(27) == -69);
     assert(QHT4->bin(23) == -42);
-
+    
     delete QHT4;
-
+    
     std::cout << "Testing ignore duplicates passed" << std::endl;
-
+    
     std::cout << "All tests passed!" << std::endl;
-
+    
     return 0;
 }
