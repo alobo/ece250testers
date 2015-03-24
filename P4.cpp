@@ -208,7 +208,7 @@ int main() {
     assert(QHT3->load_factor() == 1);
     QHT3->erase(69);
     QHT3->erase(-69);
-    assert(QHT3->load_factor() == 1);
+    assert(QHT3->load_factor() == 0.9375);
     assert(QHT3->size() == 30);
     
     std::cout << "Testing for erase with load factor passed" << std::endl;
