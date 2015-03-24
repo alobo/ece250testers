@@ -297,5 +297,7 @@ int main() {
     assert(QHT4->member(24) == false);
     assert(QHT4->member(25) == false);
     
+    delete QHT4;
+    
     return 0;
 }
