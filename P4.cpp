@@ -33,12 +33,6 @@ int main() {
     assert(QHT->empty() == true);
     std::cout << "Testing Initializations passed" << std::endl;
     
-    std::cout << "Check accessing empty bin" << std::endl;
-    assert(QHT->bin(0) == nullptr);
-    assert(QHT->bin(31) == nullptr);
-    assert(QHT->bin(10) == nullptr);
-    std::cout << "Checking accessing empty bin pass" << std::endl;
-    
     std::cout << "Testing insertion into UNOCCUPIED bin" << std::endl;
     QHT->insert(0);
     QHT->insert(1);
