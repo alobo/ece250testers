@@ -293,5 +293,58 @@ int main() {
     
     delete QHT4;
     
+
+    std::cout << "Testing ignore duplicates" << std::endl;
+
+    QHT4 = new Quadratic_hash_table<int>(n);
+
+    QHT4->insert(0);
+    QHT4->insert(5);
+    QHT4->insert(100);
+    QHT4->insert(-10);
+    QHT4->insert(-20);
+    QHT4->insert(-69);
+    QHT4->insert(69);
+    QHT4->insert(42);
+    QHT4->insert(-42);
+    QHT4->insert(3);
+    QHT4->insert(6);
+    QHT4->insert(9);
+
+    assert(QHT4->bin(0) == 0);
+    assert(QHT4->bin(3) == 3);
+    assert(QHT4->bin(4) == 100);
+    assert(QHT4->bin(5) == 5);
+    assert(QHT4->bin(6) == 69);
+    assert(QHT4->bin(7) == 6);
+    assert(QHT4->bin(9) == 9);
+    assert(QHT4->bin(10) == 42);
+    assert(QHT4->bin(12) == -20);
+    assert(QHT4->bin(22) == -10);
+    assert(QHT4->bin(27) == -69);
+    assert(QHT4->bin(23) == -42);
+    assert(QHT4->size() == 12);
+
+    QHT4->insert(-10);
+
+    //Ensure table was not modified
+    assert(QHT4->size() == 12);
+    assert(QHT4->bin(0) == 0);
+    assert(QHT4->bin(3) == 3);
+    assert(QHT4->bin(4) == 100);
+    assert(QHT4->bin(5) == 5);
+    assert(QHT4->bin(6) == 69);
+    assert(QHT4->bin(7) == 6);
+    assert(QHT4->bin(9) == 9);
+    assert(QHT4->bin(10) == 42);
+    assert(QHT4->bin(12) == -20);
+    assert(QHT4->bin(22) == -10);
+    assert(QHT4->bin(27) == -69);
+    assert(QHT4->bin(23) == -42);
+
+    delete QHT4;
+
+    std::cout << "Testing ignore duplicates passed" << std::endl;
+
     return 0;
 }
